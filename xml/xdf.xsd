@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+            targetNamespace="http://almih.narod.ru/XDFbook/1.0"
+            xmlns:df="http://almih.narod.ru/XDFbook/1.0"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified" >
+
+  <xsd:annotation>
+    <xsd:documentation>
+      XML Schema, описывающая формат
+      файлов XDF - Xml Document Format
+    </xsd:documentation>
+  </xsd:annotation>
+  
+  <!--
+  =============================================================================
+  Корневой элемент 
+  =============================================================================
+  -->
+  
+  <xsd:element name="book" type="df:bookType"/>
+  
+  <xsd:complexType name="bookType">
+    <xsd:sequence>
+      <xsd:element name="description" type="df:descriptionType" minOccurs="0" />
+      <xsd:element name="section" type="df:sectionType" />
+      <xsd:element name="resource" type="df:resourceType" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <!--
+  =============================================================================
+  Описание заголовка XDF файла
+  =============================================================================
+  -->
+  
+  <xsd:complexType name="descriptionType">
+    <xsd:sequence>
+      <xsd:element name="title-info" type="df:titleinfoType" minOccurs="0" />
+      <xsd:element name="file-info" type="df:fileinfoType" minOccurs="0" />
+      <xsd:element name="publish-info" type="df:publishinfoType" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="titleinfoType">
+    <xsd:sequence>
+      <xsd:element name="genre" type="xsd:normalizedString" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="title" type="df:TContent" minOccurs="0"/>
+      <xsd:element name="subtitle" type="df:TContent" minOccurs="0"/>
+      <xsd:element name="title-abbr" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="title-id" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="alias" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="autors" type="df:autorsType" minOccurs="0"/>
+      <xsd:element name="annotation" type="df:TContent" minOccurs="0"/>
+      <xsd:element name="keywords" type="df:keywordsType" minOccurs="0"/>
+      <xsd:element name="dates" type="df:datesType" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="fileinfoType">
+    <xsd:sequence>
+      <xsd:element name="autors" type="df:autorsType" minOccurs="0"/>
+      <xsd:element name="dates" type="df:datesType" minOccurs="0"/>
+      <xsd:element name="program-used" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="id" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="version" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="history" type="df:historyType" minOccurs="0"/>
+      <xsd:element name="updates" type="df:updatesType" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="publishinfoType">
+    <xsd:sequence>
+      <xsd:element name="autors" type="df:autorsType" minOccurs="0"/>
+      <xsd:element name="title" type="df:TContent" minOccurs="0"/>
+      <xsd:element name="subtitle" type="df:TContent" minOccurs="0"/>
+      <xsd:element name="publisher" type="df:TContent" minOccurs="0"/>
+      <xsd:element name="city" type="xsd:normalizedString" minOccurs="0"/>
+      <xsd:element name="year" type="xsd:gYear" minOccurs="0"/>
+      <xsd:element name="isbn" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="autorsType">
+    <xsd:sequence>
+      <xsd:element name="autor" type="df:autorType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="autorType">
+    <xsd:all>
+      <xsd:element name="organization" type="xsd:normalizedString" minOccurs="0"/>
+      <xsd:element name="lastname" type="xsd:normalizedString" minOccurs="0"/>
+      <xsd:element name="firstname" type="xsd:normalizedString" minOccurs="0"/>
+      <xsd:element name="patroname" type="xsd:normalizedString" minOccurs="0"/>
+      <xsd:element name="nickname" type="xsd:normalizedString" minOccurs="0"/>
+      <xsd:element name="homepage" type="df:homepageType" minOccurs="0"/>
+      <xsd:element name="e-mail" type="df:emailType" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+  
+  <xsd:complexType name="keywordsType">
+    <xsd:sequence>
+      <xsd:element name="word" type="xsd:normalizedString" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="datesType">
+    <xsd:sequence>
+      <xsd:element name="date" type="df:dateType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="dateType">
+    <xsd:simpleContent>
+      <xsd:restriction base="xsd:anyType" >
+        <xsd:attribute name="event" type="df:eventsTypes" use="required" />
+        <xsd:attribute name="value" type="xsd:date" use="required" />
+      </xsd:restriction>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  
+  <xsd:simpleType name="eventsTypes">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="creation"/> 
+      <xsd:enumeration value="start"/>
+      <xsd:enumeration value="expire"/>
+      <xsd:enumeration value="revision"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:complexType name="historyType">
+    <xsd:sequence>
+      <xsd:element name="p" type="df:inlineType" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="updatesType">
+    <xsd:sequence>
+      <xsd:element name="pack" type="df:packType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="packType">
+    <xsd:simpleContent>
+      <xsd:restriction base="xsd:anyType">
+        <xsd:attribute name="id" type="xsd:normalizedString" use="required"/>
+        <xsd:attribute name="date" type="xsd:date" use="required"/>
+      </xsd:restriction>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  
+  <xsd:simpleType name="emailType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[a-zA-Z0-9\-_]+@([a-zA-Z0-9\-_](\.)?)+"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="homepageType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="http://.*"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <!--
+  =============================================================================
+  Описание тела XDF файла
+  =============================================================================
+  -->
+  
+  <xsd:complexType name="sectionType">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <!-- Заголовок секции -->
+        <xsd:element name="enumeration" type="df:TContent" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="title" type="df:TContent"/>
+        <xsd:element name="subtitle" type="df:TContent"/>
+        <xsd:element name="endorsed" type="df:endorsedType"/>
+        <xsd:element name="keywords" type="df:keywordsType"/>
+        <!-- Тело секции -->
+        <xsd:element name="section" type="df:sectionType"/>
+        <xsd:element name="appendixes" type="df:sectionType"/>
+        <xsd:element name="clause" type="df:clauseType"/>
+        <xsd:element name="footnote" type="df:footnoteType"/>
+        <xsd:element name="p" type="df:inlineType"/>
+        <xsd:element name="image" type="df:imageType"/>
+        <xsd:element name="equation" type="df:equationType"/>
+        <xsd:element name="table" type="df:tableType"/>
+        <xsd:element name="list" type="df:listType"/>
+        <xsd:element name="param" type="df:paramType"/>
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string" use="optional"/>
+    <xsd:attribute name="type" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="endorsedType">
+    <xsd:sequence>
+      <xsd:element name="p" type="df:inlineType" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="clauseType">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="p" type="df:inlineType"/>
+      <xsd:element name="image" type="df:imageType"/>
+      <xsd:element name="equation" type="df:equationType"/>
+      <xsd:element name="table" type="df:tableType"/>
+      <xsd:element name="list" type="df:listType"/>
+      <xsd:element name="param" type="df:paramType"/>
+    </xsd:choice>
+    <xsd:attribute name="id" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="footnoteType">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="p" type="df:inlineType"/>
+      <xsd:element name="image" type="df:imageType"/>
+      <xsd:element name="equation" type="df:equationType"/>
+      <xsd:element name="table" type="df:tableType"/>
+      <xsd:element name="list" type="df:listType"/>
+      <xsd:element name="param" type="df:paramType"/>
+    </xsd:choice>
+    <xsd:attribute name="id" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="listType">
+    <xsd:sequence>
+      <xsd:element name="li" type="df:TContent" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:simpleType name="markerType">
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:complexType name="indexType" mixed="true">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="sub" type="df:indexType"/>
+      <xsd:element name="sup" type="df:indexType"/>
+      <xsd:element name="symbol" type="df:symbolType"/>
+      <xsd:element name="image" type="df:imageType"/>
+      <xsd:element name="equation" type="df:equationType"/>
+      <xsd:element name="param" type="df:paramType"/>
+    </xsd:choice>
+  </xsd:complexType>
+  
+  <xsd:complexType name="symbolType">
+    <xsd:attribute name="lang" type="df:langType" use="optional"/>
+    <xsd:attribute name="name" type="xsd:string" use="required"/>
+  </xsd:complexType>
+  
+  <xsd:simpleType name="langType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="greek"/>
+      <xsd:enumeration value="euro"/>
+      <xsd:enumeration value="math"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:complexType name="imageType">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <!-- Собственно картинка -->
+        <xsd:element name="binary-resource" type="df:binaryResourceType"/>
+        <xsd:any namespace="http://www.w3.org/2000/svg" minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+        <!-- Дополнительное содержание -->
+        <xsd:element name="enumeration" type="df:inlineType"/>
+        <xsd:element name="title" type="df:TContent"/>
+        <xsd:element name="subtitle" type="df:TContent"/>
+        <xsd:element name="p" type="df:inlineType"/>
+        <xsd:element name="image" type="df:imageType"/>
+        <xsd:element name="equation" type="df:equationType"/>
+        <xsd:element name="table" type="df:tableType"/>
+        <xsd:element name="list" type="df:listType"/>
+        <xsd:element name="param" type="df:paramType"/>
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attribute name="src" type="xsd:string" use="optional" />
+    <xsd:attribute name="width" type="xsd:string" use="optional" />
+    <xsd:attribute name="height" type="xsd:string" use="optional" />
+  </xsd:complexType>
+  
+  <xsd:complexType name="equationType">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <!-- Собственно формула -->
+        <xsd:element name="binary-resource" type="df:binaryResourceType"/>
+        <xsd:element name="text-resource" type="df:textResourceType"/>
+        <xsd:any namespace="http://www.w3.org/1998/Math/MathML" minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+        <!-- дополнительное содержание -->
+        <xsd:element name="enumeration" type="df:inlineType"/>
+        <xsd:element name="p" type="df:inlineType"/>
+        <xsd:element name="image" type="df:imageType"/>
+        <xsd:element name="equation" type="df:equationType"/>
+        <xsd:element name="table" type="df:tableType"/>
+        <xsd:element name="list" type="df:listType"/>
+        <xsd:element name="param" type="df:paramType"/>
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attribute name="src" type="xsd:string" use="optional" />
+  </xsd:complexType>
+  
+  
+  <xsd:complexType name="tableType">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element name="enumeration" type="df:inlineType"/>
+        <xsd:element name="title" type="df:TContent"/>
+        <xsd:element name="subtitle" type="df:TContent"/>
+      </xsd:choice>
+      <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+        <xsd:element name="tr" type="df:trType"/>
+      </xsd:sequence>
+    </xsd:sequence>
+    <xsd:attribute name="border" type="xsd:nonNegativeInteger" use="optional"/>
+    <xsd:attribute name="width" type="xsd:string" use="optional"/>
+    <xsd:attribute name="id" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="trType">
+    <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+      <xsd:element name="td" type="df:tdType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="tdType">
+    <xsd:complexContent>
+      <xsd:extension base="df:TContent">
+        <xsd:attribute name="align" type="df:alignType" use="optional"/>
+        <xsd:attribute name="valign" type="df:valignType" use="optional"/>
+        <xsd:attribute name="colspan" type="xsd:positiveInteger" use="optional"/>
+        <xsd:attribute name="rowspan" type="xsd:positiveInteger" use="optional"/>
+        <xsd:attribute name="nowrap" type="df:yesnoType" use="optional"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <xsd:simpleType name="alignType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="center"/>
+      <xsd:enumeration value="left"/>
+      <xsd:enumeration value="right"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="valignType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="baseline"/>
+      <xsd:enumeration value="bottom"/>
+      <xsd:enumeration value="middle"/>
+      <xsd:enumeration value="top"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="yesnoType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="yes"/>
+      <xsd:enumeration value="no"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:complexType name="inlineType" mixed="true">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="id" type="df:idType"/>
+      <xsd:element name="marker" type="df:markerType"/>
+      <xsd:element name="def" type="df:defType"/>
+      <xsd:element name="link" type="df:linkType"/>
+      <xsd:element name="sub" type="df:indexType"/>
+      <xsd:element name="sup" type="df:indexType"/>
+      <xsd:element name="symbol" type="df:symbolType"/>
+      <xsd:element name="image" type="df:imageType"/>
+      <xsd:element name="equation" type="df:equationType"/>
+      <xsd:element name="param" type="df:paramType"/>
+    </xsd:choice>
+  </xsd:complexType>
+  
+  <!-- 
+    Описание самой распространенной комбинации: 
+    либо block-level либо inline-level элементы
+  -->
+  <xsd:complexType name="TContent" mixed="true">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+          <!-- не должно быть mixed -->
+          <xsd:element name="p" type="df:inlineType"/>
+          <xsd:element name="list" type="df:listType"/>
+          <xsd:element name="table" type="df:tableType"/>
+          <xsd:element name="image" type="df:imageType"/>
+          <xsd:element name="equation" type="df:equationType"/>
+          <!-- mixed content -->
+          <xsd:element name="id" type="df:idType"/>
+          <xsd:element name="marker" type="df:markerType"/>
+          <xsd:element name="def" type="df:defType"/>
+          <xsd:element name="link" type="df:linkType"/>
+          <xsd:element name="sub" type="df:indexType"/>
+          <xsd:element name="sup" type="df:indexType"/>
+          <xsd:element name="symbol" type="df:symbolType"/>
+          <xsd:element name="param" type="df:paramType"/>
+        </xsd:choice>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="paramType">
+    <xsd:attribute name="name" type="xsd:string" use="required"/>
+    <xsd:attribute name="value" type="xsd:string" use="required"/>
+  </xsd:complexType>
+  
+  <xsd:simpleType name="idType">
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:complexType name="linkType">
+    <xsd:attribute name="type" type="df:linktypeType" use="required"/>
+    <xsd:attribute name="dest" type="xsd:string" use="optional"/>
+    <xsd:attribute name="span" type="xsd:integer" use="optional"/>
+    <xsd:attribute name="doc" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  
+  <xsd:simpleType name="linktypeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="external"/>
+      <xsd:enumeration value="section"/>
+      <xsd:enumeration value="clause"/>
+      <xsd:enumeration value="image"/>
+      <xsd:enumeration value="table"/>
+      <xsd:enumeration value="equation"/>
+      <xsd:enumeration value="file"/>
+      <xsd:enumeration value="appendix"/>
+      <xsd:enumeration value="footnote"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:complexType name="defType">
+    <xsd:attribute name="value" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  
+  <!--
+  =============================================================================
+  Описание ресурсов
+  =============================================================================
+  -->
+  
+  <xsd:complexType name="resourceType">
+    <xsd:sequence>
+      <xsd:choice minOccurs="1" maxOccurs="unbounded">
+        <xsd:element name="text-resource" type="df:textResourceType"/>
+        <xsd:element name="binary-resource" type="df:binaryResourceType"/>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="textResourceType" mixed="true">
+    <xsd:sequence>
+<!--      <xsd:any namespace="http://almih.narod.ru/XDFbook/1.0" minOccurs="0" maxOccurs="unbounded" processContents="skip"/> -->
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="binaryResourceType">
+    <xsd:simpleContent>
+      <xsd:restriction base="xsd:anyType">
+        <xsd:minLength value="1"/>
+        <xsd:attribute name="name" type="xsd:string" use="optional"/>
+        <xsd:attribute name="type" type="xsd:string" use="optional"/>
+        <xsd:attribute name="encoding" type="df:encodingType" use="required"/>
+      </xsd:restriction>
+    </xsd:simpleContent>
+
+  </xsd:complexType>
+  
+  <xsd:simpleType name="encodingType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="base64"/>
+      <xsd:enumeration value="hex"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+</xsd:schema>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<?xml-stylesheet type="text/xsl" href="main.xsl" ?>
+
+
+<book xmlns="http://almih.narod.ru/XDFbook/1.0" 
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <description>
+  
+    <!-- Описание книги -->
+    <title-info>
+      <genre>правила/устройства</genre>
+      <title>Правила Устройства Электроустановок</title>
+      <title-abbr>ПУЭ</title-abbr>
+      <title-id>ПУЭ</title-id>
+      <autors>
+        <autor>
+          <organization>МИНИСТЕРСТВО ЭНЕРГЕТИКИ И ЭЛЕКТРИФИКАЦИИ СССР</organization>
+        </autor>
+        <autor>
+          <organization>ГЛАВНОЕ ТЕХНИЧЕСКОЕ УПРАВЛЕНИЕ ПО ЭКСПЛУАТАЦИИ ЭНЕРГОСИСТЕМ</organization>
+        </autor>
+      </autors>
+    </title-info>
+    
+    <!-- Описание электронного документа -->
+    <file-info>
+      <autors>
+        <autor>
+          <lastname>Михайленко</lastname>
+          <firstname>Алексей</firstname> 
+          <patroname>Михайлович</patroname>
+          <nickname>almih</nickname>
+          <e-mail>almih99@mail.ru</e-mail>
+          <homepage>http://almih.narod.ru</homepage>
+        </autor>
+      </autors>
+      <dates>
+        <date event="creation" value="2005-07-25">25.07.2005</date>
+        <!--
+        <date event="revision" value=""></date>
+        -->
+      </dates>
+      <program-used>bred3.0.3u</program-used>
+      <id>18680-99347-51349-36243</id>
+      <version>1.0</version>
+      <history>
+        <p>25 июля 2005 года начата работа над документом</p>
+        <p>3 августа 2005 года закончен скрипт, создающий заготовки глав.</p>
+        <p>5 августа 2005 года добавлена первая глава -- глава 1.3</p>
+        <p>9 августа 2005 года. Добавлены главы 1.4, 1.5, 1.6 и 2.1. Параллельно идет доработка формата XDF. Мелкие изменения. И создается описание.</p>
+        <p>14 сентября 2005 года. По моим оценкам около 75% документа готово. Большая часть оставшихся глав имеет размер до 100 килобайт.</p>
+        <p>22 сентября. Все главы закончены. Кажется остались приложения...</p>
+        <p>27 сентября. Заработала схема xdf.xsd. Исправлены мелкие погрешности.</p>
+        <p>9 ноября 2006. Поправил две ссылки в 2.3.125, исправил грамматическую ошибку в заголовке 3.1.14</p>
+      </history>
+    </file-info>
+  </description>
+  
+  <section id="0">
+    <title>Правила устройства электроустановок</title>
+
+   
+    <section id="0.1">
+      <title>Предисловие</title>
+      <p>Настоящее электронное издание "Правил Устройства Электроустановок" (ПУЭ) включает в себя главы 6 и 7 изданий ПУЭ по состоянию на момент выхода. Полный перечень глав с указанием номера издания приведен на страничке about.</p>
+      <p>Данное издание не является официальным и не может использоваться для ссылок на него. Тем не менее оно может оказаться полезным как справочный материал и для изучения ПУЭ.</p>
+    </section>
+    
+    <section>
+      <enumeration>Раздел <id>1</id>.</enumeration>
+      <title>Общие правила</title>
+      
+      <xi:include href="1.1.xml"/>
+      <xi:include href="1.2.xml"/>
+      <xi:include href="1.3.xml"/>
+      <xi:include href="1.4.xml"/>
+      <xi:include href="1.5.xml"/>
+      <xi:include href="1.6.xml"/>
+      <xi:include href="1.7.xml"/>
+      <xi:include href="1.8.xml"/>
+      <xi:include href="1.9.xml"/>
+    </section>
+    
+    <section>
+      <enumeration>Раздел <id>2</id>.</enumeration>
+      <title>Канализация электроэнергии</title>
+      
+      <xi:include href="2.1.xml"/>
+      <xi:include href="2.2.xml"/>
+      <xi:include href="2.3.xml"/>
+      <xi:include href="2.4.xml"/>
+      <xi:include href="2.5.xml"/>
+    </section>
+    
+    <section>
+      <enumeration>Раздел <id>3</id>.</enumeration>
+      <title>Защита и автоматика</title>
+      
+      <xi:include href="3.1.xml"/>
+      <xi:include href="3.2.xml"/>
+      <xi:include href="3.3.xml"/>
+      <xi:include href="3.4.xml"/>
+    </section>
+    
+    <section>
+      <enumeration>Раздел <id>4</id>.</enumeration>
+      <title>Распределительные устройства и подстанции</title>
+      
+      <xi:include href="4.1.xml"/>
+      <xi:include href="4.2.xml"/>
+      <xi:include href="4.3.xml"/>
+      <xi:include href="4.4.xml"/>
+    </section>
+    
+    <section>
+      <enumeration>Раздел <id>5</id>.</enumeration>
+      <title>Электросиловые установки</title>
+      
+      <xi:include href="5.1.xml"/>
+      <xi:include href="5.2.xml"/>
+      <xi:include href="5.3.xml"/>
+      <xi:include href="5.4.xml"/>
+      <xi:include href="5.5.xml"/>
+      <xi:include href="5.6.xml"/>
+    </section>
+    
+    <section>
+      <enumeration>Раздел <id>6</id>.</enumeration>
+      <title>Электрическое освещение</title>
+      
+      <xi:include href="6.1.xml"/>
+      <xi:include href="6.2.xml"/>
+      <xi:include href="6.3.xml"/>
+      <xi:include href="6.4.xml"/>
+      <xi:include href="6.5.xml"/>
+      <xi:include href="6.6.xml"/>
+    </section>
+    
+    <section>
+      <enumeration>Раздел <id>7</id>.</enumeration>
+      <title>Электрооборудование специальных установок</title>
+      
+      <xi:include href="7.1.xml"/>
+      <xi:include href="7.2.xml"/>
+      <xi:include href="7.3.xml"/>
+      <xi:include href="7.4.xml"/>
+      <xi:include href="7.5.xml"/>
+      <xi:include href="7.6.xml"/>
+      <xi:include href="7.7.xml"/>
+      <xi:include href="7.10.xml"/>
+    </section>
+
+    
+    <section type="appendixes" id="a">
+      <title>ПРИЛОЖЕНИЯ</title>
+      
+      <xi:include href="a0.xml"/>
+      <xi:include href="a1.xml"/>
+      <xi:include href="a3.xml"/>
+      <xi:include href="a4.xml"/>
+      <xi:include href="a5.xml"/>
+    </section>
+
+  </section>
+
+</book>
